@@ -23,5 +23,7 @@ test:
   database: juilet_airways_test
   username: sholom
 
+
 production:
- url: <%= ENV['DATABASE_URL'] %>
+  username: sholom
+  url: <%= ENV['DATABASE_URL'] %>
