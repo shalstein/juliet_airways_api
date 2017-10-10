@@ -13,6 +13,7 @@ development:
   <<: *default
   database: juilet_airways_development
   username: sholom
+  password: password
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -23,6 +24,4 @@ test:
   username: sholom
 
 production:
-  <<: *default
-  database: juilet_airways_production
-  username: sholom
+ url: <%= ENV['DATABASE_URL'] %>
