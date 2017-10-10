@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170818140603) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "flights", force: :cascade do |t|
     t.string   "departure_city"
     t.string   "arival_city"
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 20170818140603) do
     t.string   "confirmation_number"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.index ["confirmation_number"], name: "index_reservations_on_confirmation_number", unique: true
-    t.index ["flight_id"], name: "index_reservations_on_flight_id"
+    t.index ["confirmation_number"], name: "index_reservations_on_confirmation_number", unique: true, using: :btree
+    t.index ["flight_id"], name: "index_reservations_on_flight_id", using: :btree
   end
 
 end
