@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  arival_city: MyString
+  departure_city: MyString
+  minutes_past_midnight: 1
+
+two:
+  arival_city: MyString
+  departure_city: MyString
+  minutes_past_midnight: 1

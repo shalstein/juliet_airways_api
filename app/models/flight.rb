@@ -2,6 +2,7 @@ class Flight < ApplicationRecord
 
   extend Format_date
 
+  belongs_to :route 
   has_many :reservations
 
 
