@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   post 'api/reservations/find', to: 'reservations#find'
 
+  get 'api/airports', to: 'airports#index'
+
 end

@@ -2,7 +2,7 @@ class Flight < ApplicationRecord
 
   extend Format_date
 
-  belongs_to :route 
+  belongs_to :route
   has_many :reservations
 
 
@@ -11,6 +11,9 @@ class Flight < ApplicationRecord
   end
 
 
+  def format_departure_time
+    departure_datetime.strftime("%I:%M %p")
+  end
 
 
 
