@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   get 'api/airports', to: 'airports#index'
 
+  get 'api/airports/:id/destinations', to: 'airports#destinations'
+
 end
