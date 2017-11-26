@@ -7,7 +7,7 @@ class AirportsController < ApplicationController
   def destinations
     airport = Airport.find(airport_params)
     destinations = airport.arival_airports
-    render json: destinations
+    render json: destinations, meta: {origin_airport_id: airport.id}
   end
 
   private
