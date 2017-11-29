@@ -4,6 +4,9 @@ class Flight < ApplicationRecord
 
   belongs_to :route
   has_many :reservations
+  has_one :arival_airport, through: :route
+  has_one :departure_airport, through: :route
+
 
 
   def self.format_time(time)

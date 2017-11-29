@@ -2,17 +2,16 @@ class FlightsController < ApplicationController
 
   def find
     departure_date = DateTime.parse(flight_params[:departure_date])
-    departure_airport = Airport.find_by(iata_code: flight_params[:departure_city])
-    arival_airport = Airport.find_by(iata_code: flight_params[:arival_city])
-    sort_by = flight_params[:sort_by].nil? ? 'departure_datetime' : flight_params[:sort_by]
+    departure_airport = Airport.find_by(iata_code: flight_params[:departure_airport])
+    arival_airport = Airport.find_by(iata_code: flight_params[:arival_airport])
 
-      flights = Flight.joins(:route).where(routes: {departure_airport_id: departure_airport.id, arival_airport_id: arival_airport.id}, flights: {departure_datetime: between_beginning_to_end_of(departure_date) } )
+    flights = Flight.joins(:route).where(routes: {departure_airport_id: departure_airport.id, arival_airport_id: arival_airport.id}, flights: {departure_datetime: between_beginning_to_end_of(departure_date) } ).order(sort_by(flight_params[:sort_by]))
 
-      if flights.empty?
-        render json: {error: "Their are no flights on the queried date"}
-      else
-        render json: flights, meta: {departure_airport: departure_airport, arival_airport: arival_airport, departure_date: Flight.format_date(departure_date)}, meta_key: 'request' 
-      end
+    if flights.empty?
+      render json: {error: "Their are no flights on the queried date"}
+    else
+      render json: flights, meta: {departure_airport: departure_airport, arival_airport: arival_airport, departure_date: Flight.format_date(departure_date)}, meta_key: 'request'
+    end
 
   end
 
@@ -32,7 +31,7 @@ class FlightsController < ApplicationController
   private
 
   def flight_params
-    params.require(:flights).permit(:departure_city, :sort_by, :arival_city, :departure_date)
+    params.require(:flights).permit(:departure_airport, :sort_by, :arival_airport, :departure_date)
   end
 
   def status_params
@@ -43,6 +42,15 @@ class FlightsController < ApplicationController
     date.beginning_of_day..date.end_of_day
   end
 
-
+  def sort_by(sort_by_params)
+    if sort_by_params.nil? ||sort_by_params == 'departure_datetime'
+      sort_by = 'flights.departure_datetime asc'
+    elsif sort_by_params == 'price'
+      sort_by = 'routes.base_price asc'
+    else
+      sort_by = 'flights.arival_datetime asc'
+    end
+    sort_by
+  end
 
 end
