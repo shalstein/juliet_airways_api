@@ -1,5 +1,8 @@
 class ReservationSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :middle_name, :payment_info, :confirmation_number
+
+  belongs_to :passenger
+  
+  attributes :id, :payment_info
 
 
   def payment_info
