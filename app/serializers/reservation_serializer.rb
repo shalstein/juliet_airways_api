@@ -1,8 +1,9 @@
 class ReservationSerializer < ActiveModel::Serializer
 
   belongs_to :passenger
-  
-  attributes :id, :payment_info
+  belongs_to :flight
+  belongs_to :route 
+  attributes :id, :payment_info, :confirmation_number
 
 
   def payment_info
@@ -13,5 +14,4 @@ class ReservationSerializer < ActiveModel::Serializer
     Reservation.format_date(object.departure_date)
   end
 
-  belongs_to :flight
 end

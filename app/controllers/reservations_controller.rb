@@ -6,7 +6,7 @@ class ReservationsController < ApplicationController
     passenger.dob = dob
     passenger.save!
 
-    reservation = passenger.reservations.build(reservations_params)
+    reservation = passenger.reservations.create(reservations_params)
 
      if passenger.errors.any?
        render json: {reservation: reservation.errors}
