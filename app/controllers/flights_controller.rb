@@ -18,7 +18,7 @@ class FlightsController < ApplicationController
 
   def status
     departure_date = DateTime.parse(status_params[:flight_date])
-    flight = Flight.where(flight_number: status_params[:flight_number], departure_datetime: between_beginning_to_end_of(departure_date) ).take
+    flight = Flight.joins(:route).where(departure_datetime: between_beginning_to_end_of(departure_date), routes: {id: status_params[:flight_number] } ).take
 
     if flight.present?
       render json: flight, flight_status: 'ON TIME'

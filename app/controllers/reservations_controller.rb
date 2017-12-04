@@ -17,7 +17,8 @@ class ReservationsController < ApplicationController
 
 
   def find
-    reservation = Reservation.find_by(confirmation_number: find_params[:confirmation_number], first_name: find_params[:first_name], last_name: find_params[:last_name] )
+    reservation = Reservation.joins(:passenger).where(confirmation_number: find_params[:confirmation_number], passengers: {first_name: find_params[:first_name], last_name: find_params[:last_name]} ).take
+
 
       if reservation
         render json: reservation
