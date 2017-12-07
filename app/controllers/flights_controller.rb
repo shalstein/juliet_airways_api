@@ -2,15 +2,15 @@ class FlightsController < ApplicationController
 
   def find
     departure_date = DateTime.parse(flight_params[:departure_date])
-    departure_airport = Airport.find_by(iata_code: flight_params[:departure_airport])
-    arival_airport = Airport.find_by(iata_code: flight_params[:arival_airport])
+    departure_airport_id = flight_params[:departure_airport]
+    arival_airport_id = flight_params[:arival_airport]
 
-    flights = Flight.joins(:route).where(routes: {departure_airport_id: departure_airport.id, arival_airport_id: arival_airport.id}, flights: {departure_datetime: between_beginning_to_end_of(departure_date) } ).order(sort_by(flight_params[:sort_by]))
+    flights = Flight.joins(:route).where(routes: {departure_airport_id: departure_airport_id, arival_airport_id: arival_airport_id}, flights: {departure_datetime: between_beginning_to_end_of(departure_date) } ).order(sort_by(flight_params[:sort_by]))
 
     if flights.empty?
       render json: {error: "Their are no flights on the queried date"}
     else
-      render json: flights, meta: {departure_airport: departure_airport, arival_airport: arival_airport, departure_date: Flight.format_date(departure_date)}, meta_key: 'request'
+      render json: flights, meta: {departure_airport: departure_airport_id, arival_airport: arival_airport_id, departure_date: Flight.format_date(departure_date)}, meta_key: 'request'
     end
 
   end
