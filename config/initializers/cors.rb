@@ -7,12 +7,7 @@
 
  Rails.application.config.middleware.insert_before 0, Rack::Cors do
    allow do
-<<<<<<< HEAD
      origins 'https://juilet-air.herokuapp.com', 'http://localhost:3000'
-=======
-     #origins 'https://juilet-air.herokuapp.com'
-     origins 'http://localhost:3000'
->>>>>>> add_whereWeFly_info
 
      resource '*',
       headers: :any,
