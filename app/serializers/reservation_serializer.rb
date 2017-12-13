@@ -2,7 +2,8 @@ class ReservationSerializer < ActiveModel::Serializer
 
   belongs_to :passenger
   belongs_to :flight
-  belongs_to :route 
+  belongs_to :route
+
   attributes :id, :payment_info, :confirmation_number
 
 

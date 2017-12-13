@@ -17,8 +17,10 @@ puts "Seeding..."
  jfk_lax = Route.create(arival_airport: lax, departure_airport: jfk, base_price: 317)
  lax_jfk = Route.create(arival_airport: jfk, departure_airport: lax, base_price: 379)
 
+ jfk_ord = Route.create(arival_airport: ord, departure_airport: jfk, base_price: 452)
+ ord_jfk = Route.create(arival_airport: jfk, departure_airport: ord, base_price: 452)
 
-last_day = Date.today + 90.days
+last_day = Date.today + 180.days
 current_day = Date.current
 
 while current_day < last_day do
@@ -87,6 +89,27 @@ arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.
           Flight.create(
             route: lax_jfk, departure_datetime: departure_datetime, arival_datetime: arival_datetime
             )
+
+
+            depart_time = Time.current.at_midnight + 755.minutes
+            departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+            arival_time =  Time.current.at_midnight + 1244.minutes
+            arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+            Flight.create(
+              route: jfk_ord, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+              )
+
+              depart_time = Time.current.at_midnight + 502.minutes
+              departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+              arival_time =  Time.current.at_midnight + 1044.minutes
+              arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+              Flight.create(
+                route: ord_jfk, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+                )
 
 
     current_day = current_day + 1.day

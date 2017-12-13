@@ -5,7 +5,6 @@ class Reservation < ApplicationRecord
   after_create :generate_confirmation
   delegate :route, to: :flight
 
-  #self.primary_key = confirmation_number
 
 
 
