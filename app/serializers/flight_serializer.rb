@@ -1,5 +1,6 @@
 class FlightSerializer < ActiveModel::Serializer
-  attributes :id, :departure_time, :arival_time, :price, :flight_number, :total_fly_time, :departure_date, :departure_city, :arival_city
+  belongs_to :route
+  attributes :id, :departure_time, :departure_date, :arival_time, :total_fly_time
 
   def departure_time
     Flight.format_time(object.departure_datetime)

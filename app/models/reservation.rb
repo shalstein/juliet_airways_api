@@ -1,11 +1,11 @@
 class Reservation < ApplicationRecord
   extend Format_date
-
-  after_create :generate_confirmation
-
-  #self.primary_key = confirmation_number
-
+  belongs_to :passenger
   belongs_to :flight
+  after_create :generate_confirmation
+  delegate :route, to: :flight
+
+
 
 
   private

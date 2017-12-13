@@ -1,165 +1,129 @@
 puts "Seeding..."
 
- flights_atl_jfk = [
-   { departure_date_time: DateTime.iso8601('2017-09-06T08:10'), arival_date_time: DateTime.iso8601('2017-09-06T10:32'), flight_number: 1},
-   { departure_date_time: DateTime.iso8601('2017-09-06T10:30'), arival_date_time: DateTime.iso8601('2017-09-06T12:51'), flight_number: 2},
-   { departure_date_time: DateTime.iso8601('2017-09-06T13:40'), arival_date_time: DateTime.iso8601('2017-09-06T16:04'), flight_number: 3},
-   { departure_date_time: DateTime.iso8601('2017-09-06T15:20'), arival_date_time: DateTime.iso8601('2017-09-06T17:47'), flight_number: 4},
-   { departure_date_time: DateTime.iso8601('2017-09-06T17:20'), arival_date_time: DateTime.iso8601('2017-09-06T19:50'), flight_number: 5},
-   { departure_date_time: DateTime.iso8601('2017-09-06T21:45'), arival_date_time: DateTime.iso8601('2017-09-06T00:09'), flight_number: 6}
- ]
-
-  start_date = flights_atl_jfk[0][:departure_date_time]
-  last_date = start_date + 180.day
-  count = 0
-
-   while start_date + count.days < last_date do
-
-    flights_atl_jfk.each do |flight|
-      departure_date_time = flight[:departure_date_time] + count.days
-
-      if !departure_date_time.saturday? && !departure_date_time.sunday?
-        Flight.create(departure_city: "ATL", arival_city: "JFK", departure_datetime: departure_date_time , arival_datetime: flight[:arival_date_time] + count.days, price: 200 + rand(1..250), flight_number: flight[:flight_number] )
-      end
-
-   end
-   count += 1
-   puts count
-
-
- end
-
-
- flights_jfk_atl = [
-   { departure_date_time: DateTime.iso8601('2017-09-06T08:10'), arival_date_time: DateTime.iso8601('2017-09-06T10:32'), flight_number: 7},
-   { departure_date_time: DateTime.iso8601('2017-09-06T10:30'), arival_date_time: DateTime.iso8601('2017-09-06T12:51'), flight_number: 8},
-   { departure_date_time: DateTime.iso8601('2017-09-06T13:40'), arival_date_time: DateTime.iso8601('2017-09-06T16:04'), flight_number: 9},
-   { departure_date_time: DateTime.iso8601('2017-09-06T15:20'), arival_date_time: DateTime.iso8601('2017-09-06T17:47'), flight_number: 10},
-   { departure_date_time: DateTime.iso8601('2017-09-06T17:20'), arival_date_time: DateTime.iso8601('2017-09-06T19:50') , flight_number: 11},
-   { departure_date_time: DateTime.iso8601('2017-09-06T21:45'), arival_date_time: DateTime.iso8601('2017-09-06T00:09'), flight_number: 12}
- ]
-
-  start_date = flights_jfk_atl[0][:departure_date_time]
-  last_date = start_date + 180.day
-  count = 0
-
-   while start_date + count.days < last_date do
-
-    flights_jfk_atl.each do |flight|
-      departure_date_time = flight[:departure_date_time] + count.days
-
-      if !departure_date_time.saturday? && !departure_date_time.sunday?
-        Flight.create(departure_city: "JFK", arival_city: "ATL", departure_datetime: departure_date_time , arival_datetime: flight[:arival_date_time] + count.days, price: 200 + rand(1..250), flight_number: flight[:flight_number] )
-      end
-   end
-   count += 1
-   puts count
-
- end
-
-
- flights_jfk_ord = [
-   { departure_date_time: DateTime.iso8601('2017-09-06T08:10'), arival_date_time: DateTime.iso8601('2017-09-06T10:32'), flight_number: 13},
-   { departure_date_time: DateTime.iso8601('2017-09-06T10:30'), arival_date_time: DateTime.iso8601('2017-09-06T12:51'), flight_number: 14},
-   { departure_date_time: DateTime.iso8601('2017-09-06T13:40'), arival_date_time: DateTime.iso8601('2017-09-06T16:04'), flight_number: 15},
- ]
-
-  start_date = flights_jfk_ord[0][:departure_date_time]
-  last_date = start_date + 180.day
-  count = 0
-
-   while start_date + count.days < last_date do
-
-    flights_jfk_ord.each do |flight|
-      departure_date_time = flight[:departure_date_time] + count.days
-
-      if !departure_date_time.saturday? && !departure_date_time.sunday?
-        Flight.create(departure_city: "JFK", arival_city: "ORD", departure_datetime: departure_date_time , arival_datetime: flight[:arival_date_time] + count.days, price: 200 + rand(1..250), flight_number: flight[:flight_number] )
-      end
-   end
-   count += 1
-   puts count
-
- end
-
- flights_ord_jfk = [
-   { departure_date_time: DateTime.iso8601('2017-09-06T15:20'), arival_date_time: DateTime.iso8601('2017-09-06T17:47'), flight_number: 16},
-   { departure_date_time: DateTime.iso8601('2017-09-06T17:20'), arival_date_time: DateTime.iso8601('2017-09-06T19:50'), flight_number: 17},
-   { departure_date_time: DateTime.iso8601('2017-09-06T21:45'), arival_date_time: DateTime.iso8601('2017-09-06T00:09'), flight_number: 18}
- ]
-
-  start_date = flights_ord_jfk[0][:departure_date_time]
-  last_date = start_date + 180.day
-  count = 0
-
-   while start_date + count.days < last_date do
-
-    flights_ord_jfk.each do |flight|
-      departure_date_time = flight[:departure_date_time] + count.days
-
-      if !departure_date_time.saturday? && !departure_date_time.sunday?
-        Flight.create(departure_city: "ORD", arival_city: "JFK", departure_datetime: departure_date_time , arival_datetime: flight[:arival_date_time] + count.days, price: 200 + rand(1..250), flight_number: flight[:flight_number] )
-      end
-   end
-   count += 1
-   puts count
-
- end
 
 
 
 
- flights_jfk_mia = [
-   { departure_date_time: DateTime.iso8601('2017-09-06T11:20'), arival_date_time: DateTime.iso8601('2017-09-06T14:36'), flight_number: 19},
-   { departure_date_time: DateTime.iso8601('2017-09-06T15:35'), arival_date_time: DateTime.iso8601('2017-09-06T19:10'), flight_number: 20},
-   { departure_date_time: DateTime.iso8601('2017-09-06T19:25'), arival_date_time: DateTime.iso8601('2017-09-06T22:57'), flight_number: 21}
- ]
+ jfk = Airport.create(iata_code: 'JFK', city: 'New York, USA')
+ atl = Airport.create(iata_code: 'ATL', city: 'Atlanta, GA, USA')
 
-  start_date = flights_jfk_mia[0][:departure_date_time]
-  last_date = start_date + 180.day
-  count = 0
-
-   while start_date + count.days < last_date do
-
-    flights_jfk_mia.each do |flight|
-      departure_date_time = flight[:departure_date_time] + count.days
-
-      if !departure_date_time.saturday? && !departure_date_time.sunday?
-        Flight.create(departure_city: "JFK", arival_city: "MIA", departure_datetime: departure_date_time , arival_datetime: flight[:arival_date_time] + count.days, price: 200 + rand(1..250), flight_number: flight[:flight_number] )
-      end
-   end
-   count += 1
-   puts count
-
- end
+ lax = Airport.create(iata_code: 'LAX', city: 'Los Angeles, CA, USA')
+ ord = Airport.create(iata_code: 'ORD', city: 'Chicago, IL, USA')
 
 
- flights_mia_jfk = [
-   { departure_date_time: DateTime.iso8601('2017-09-06T11:20'), arival_date_time: DateTime.iso8601('2017-09-06T14:36'), flight_number: 22},
-   { departure_date_time: DateTime.iso8601('2017-09-06T15:35'), arival_date_time: DateTime.iso8601('2017-09-06T19:10'), flight_number: 23},
-   { departure_date_time: DateTime.iso8601('2017-09-06T19:25'), arival_date_time: DateTime.iso8601('2017-09-06T22:57'), flight_number: 24}
- ]
+ atl_jfk = Route.create(arival_airport: jfk, departure_airport: atl, base_price: 317)
+ jfk_atl = Route.create(arival_airport: atl, departure_airport: jfk, base_price: 294)
 
-  start_date = flights_mia_jfk[0][:departure_date_time]
-  last_date = start_date + 180.day
-  count = 0
+ jfk_lax = Route.create(arival_airport: lax, departure_airport: jfk, base_price: 317)
+ lax_jfk = Route.create(arival_airport: jfk, departure_airport: lax, base_price: 379)
 
-   while start_date + count.days < last_date do
+ jfk_ord = Route.create(arival_airport: ord, departure_airport: jfk, base_price: 452)
+ ord_jfk = Route.create(arival_airport: jfk, departure_airport: ord, base_price: 452)
 
-    flights_mia_jfk.each do |flight|
-      departure_date_time = flight[:departure_date_time] + count.days
+last_day = Date.today + 180.days
+current_day = Date.current
 
-      if !departure_date_time.saturday? && !departure_date_time.sunday?
-        Flight.create(departure_city: "MIA", arival_city: "JFK", departure_datetime: departure_date_time , arival_datetime: flight[:arival_date_time] + count.days, price: 200 + rand(1..250), flight_number: flight[:flight_number] )
-      end
-   end
-   count += 1
-   puts count
-
- end
+while current_day < last_day do
 
 
+depart_time = Time.current.at_midnight + 618.minutes
+departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
 
+arival_time =  Time.current.at_midnight + 720.minutes
+arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+flight1 = Flight.create(
+  route: atl_jfk, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+  )
+
+depart_time = Time.current.at_midnight + 550.minutes
+departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+arival_time =  Time.current.at_midnight + 650.minutes
+arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+
+  Flight.create(
+    route: atl_jfk, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+    )
+
+
+    depart_time = Time.current.at_midnight + 930.minutes
+    departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+    arival_time =  Time.current.at_midnight + 1045.minutes
+    arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+    Flight.create(
+      route: jfk_atl, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+      )
+
+
+      depart_time = Time.current.at_midnight + 1162.minutes
+      departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+      arival_time =  Time.current.at_midnight + 1278.minutes
+      arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+      flight2 = Flight.create(
+        route: jfk_atl, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+        )
+
+
+        depart_time = Time.current.at_midnight + 429.minutes
+        departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+        arival_time =  Time.current.at_midnight + 533.minutes
+        arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+        Flight.create(
+          route: jfk_lax, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+          )
+
+          depart_time = Time.current.at_midnight + 603.minutes
+          departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+          arival_time =  Time.current.at_midnight + 744.minutes
+          arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+          Flight.create(
+            route: lax_jfk, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+            )
+
+
+            depart_time = Time.current.at_midnight + 755.minutes
+            departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+            arival_time =  Time.current.at_midnight + 1244.minutes
+            arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+            Flight.create(
+              route: jfk_ord, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+              )
+
+              depart_time = Time.current.at_midnight + 502.minutes
+              departure_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, depart_time.hour, depart_time.min)
+
+              arival_time =  Time.current.at_midnight + 1044.minutes
+              arival_datetime =  DateTime.new(current_day.year,current_day.month, current_day.day, arival_time.hour, arival_time.min,0,'000')
+
+              Flight.create(
+                route: ord_jfk, departure_datetime: departure_datetime, arival_datetime: arival_datetime
+                )
+
+
+    current_day = current_day + 1.day
+    puts 'finished ' + current_day.to_s
+end
+
+
+ passenger1 = Passenger.create(first_name: 'Syd', last_name: 'rosen', middle_name: 'arthur', frequent_flyer_number: '11112321', gender: 'male', dob: '1978-08-01', email: 'syd@example.com', telephone: '212-555-0121')
+
+  passenger2 = Passenger.create(first_name: 'Madison', last_name: 'Goren', middle_name: 'Rachel', frequent_flyer_number: '11112321', gender: 'female', dob: '1982-07-01', email: 'rachel@example.com', telephone: '212-555-0125')
+
+ reservation1 = Reservation.create(passenger: passenger1, flight: flight2, seat_number: '14C', travel_class: 'First Class')
+
+ reservation1 = Reservation.create(passenger: passenger2, flight: flight1, seat_number: '14C', travel_class: 'First Class')
 
 
 

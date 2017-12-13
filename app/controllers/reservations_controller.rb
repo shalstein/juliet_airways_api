@@ -1,18 +1,24 @@
 class ReservationsController < ApplicationController
 
   def create
-    reservation = Reservation.new(reservations_params.except(:day, :month, :year, :confirm_email))
-    reservation.dob = "#{reservations_params[:year]}-#{reservations_params[:month]}-#{reservations_params[:day]}"
-     if reservation.save
-       render json: reservation, payment_info: reservation_payment_params
-     else
+    dob = "#{passenger_dob_params[:year]}-#{passenger_dob_params[:month]}-#{passenger_dob_params[:day]}"
+    passenger = Passenger.new(passenger_params)
+    passenger.dob = dob
+    passenger.save!
+
+    reservation = passenger.reservations.create(reservations_params)
+
+     if passenger.errors.any?
        render json: {reservation: reservation.errors}
+     else
+       render json: reservation, payment_info: reservation_payment_params
      end
   end
 
 
   def find
-    reservation = Reservation.find_by(confirmation_number: find_params[:confirmation_number], first_name: find_params[:first_name], last_name: find_params[:last_name] )
+    reservation = Reservation.joins(:passenger).where(confirmation_number: find_params[:confirmation_number], passengers: {first_name: find_params[:first_name], last_name: find_params[:last_name]} ).take
+
 
       if reservation
         render json: reservation
@@ -22,8 +28,16 @@ class ReservationsController < ApplicationController
   end
 
   private
+    def passenger_params
+       passenger ||= params.require(:reservation).permit(:first_name, :last_name, :middle_name, :frequent_flyer_number, :gender, :telephone)
+    end
+
+    def passenger_dob_params
+       dob ||= params.require(:reservation).permit(:day, :month, :year)
+     end
+
     def reservations_params
-       reservation ||= params.require(:reservation).permit(:first_name, :last_name, :middle_name, :frequent_flyer_number, :gender, :day, :month, :year, :email, :confirm_email, :telephone, :flight_id)
+       reservation ||= params.require(:reservation).permit(:flight_id)
     end
 
     def reservation_payment_params

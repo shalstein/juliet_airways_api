@@ -2,7 +2,11 @@ class Flight < ApplicationRecord
 
   extend Format_date
 
+  belongs_to :route
   has_many :reservations
+  has_one :arival_airport, through: :route
+  has_one :departure_airport, through: :route
+
 
 
   def self.format_time(time)
@@ -10,6 +14,9 @@ class Flight < ApplicationRecord
   end
 
 
+  def format_departure_time
+    departure_datetime.strftime("%I:%M %p")
+  end
 
 
 
